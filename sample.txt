@@ -1,0 +1,160 @@
+scrapping start
+stdClass Object
+(
+    [auctionedDate] => 2018-10-13
+    [lastModifiedDateTime] => 2018-10-13T07:29:45.207Z
+)
+stdClass Object
+(
+    [objective] => sale
+    [propertyTypes] => Array
+        (
+            [0] => apartmentUnitFlat
+        )
+
+    [status] => sold
+    [saleMode] => sold
+    [channel] => residential
+    [addressParts] => stdClass Object
+        (
+            [stateAbbreviation] => nsw
+            [displayType] => fullAddress
+            [streetNumber] => 140
+            [unitNumber] => 8
+            [street] => Hampden Road
+            [suburb] => Abbotsford
+            [postcode] => 2046
+            [displayAddress] => 8/140 Hampden Road, Abbotsford NSW 2046
+        )
+
+    [advertiserIdentifiers] => stdClass Object
+        (
+            [advertiserType] => agency
+            [advertiserId] => 17061
+            [contactIds] => Array
+                (
+                    [0] => 1248910
+                    [1] => 903884
+                )
+
+        )
+
+    [bathrooms] => 1
+    [bedrooms] => 2
+    [carspaces] => 2
+    [dateUpdated] => 2018-10-14T21:50:43.47Z
+    [description] => Fresh contemporary interiors, a bright north-east aspect and oversized layout make this top floor apartment a perfect home for the young family. One of nine in the block, the apartment is wrapped in three balconies with a well-conceived two-bedroom layout incorporating a separate study or nursery. House-like proportions and a double auto garage add to the appeal of this superb bayside home between Wareemba village and Campbell Park. 
+
+- 96sqm of in/outdoor living space, 30sqm double garage
+- 2 double bedrooms with built-ins plus a study/nursery  
+- King sized master bed, updated family sized bathroom  
+- Huge living room with a balcony overlooking the gardens
+- Eat-in Caesarstone kitchen, large separate internal laundry
+- Reverse cycle air, light and airy, windows on three sides 
+- Child-friendly common garden and on-site visitor parking
+- 400m to Wareemba village, stroll to scenic foreshore walks
+
+    [geoLocation] => stdClass Object
+        (
+            [latitude] => -33.8546641
+            [longitude] => 151.134496
+        )
+
+    [headline] => House-like proportions and a family friendly layout
+    [id] => 2014642260
+    [inspectionDetails] => stdClass Object
+        (
+            [inspections] => Array
+                (
+                )
+
+            [pastInspections] => Array
+                (
+                    [0] => stdClass Object
+                        (
+                            [recurrence] => none
+                            [closingDateTime] => 2018-10-13T04:45:00Z
+                            [description] => 
+                            [openingDateTime] => 2018-10-13T04:15:00Z
+                        )
+
+                )
+
+            [isByAppointmentOnly] => 
+        )
+
+    [isNewDevelopment] => 
+    [media] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [category] => image
+                    [type] => photo
+                    [url] => https://bucket-api.domain.com.au/v1/bucket/image/2014642260_5_1_180917_070320-w4256-h2832
+                )
+
+            [1] => stdClass Object
+                (
+                    [category] => image
+                    [type] => photo
+                    [url] => https://bucket-api.domain.com.au/v1/bucket/image/2014642260_2_1_181003_063429-w4256-h2832
+                )
+
+            [2] => stdClass Object
+                (
+                    [category] => image
+                    [type] => photo
+                    [url] => https://bucket-api.domain.com.au/v1/bucket/image/2014642260_3_1_181003_063350-w4256-h2832
+                )
+
+            [3] => stdClass Object
+                (
+                    [category] => image
+                    [type] => photo
+                    [url] => https://bucket-api.domain.com.au/v1/bucket/image/2014642260_4_1_181003_063429-w4256-h2832
+                )
+
+            [4] => stdClass Object
+                (
+                    [category] => image
+                    [type] => photo
+                    [url] => https://bucket-api.domain.com.au/v1/bucket/image/2014642260_5_1_181003_063350-w4256-h2832
+                )
+
+        )
+
+    [priceDetails] => stdClass Object
+        (
+            [canDisplayPrice] => 
+            [displayPrice] => SOLD - $775,000
+        )
+
+    [saleDetails] => stdClass Object
+        (
+            [saleMethod] => auction
+            [soldDetails] => stdClass Object
+                (
+                    [soldAction] => auction
+                    [source] => internal
+                    [soldPrice] => 775000
+                    [soldDate] => 2018-10-13
+                    [canDisplayPrice] => 1
+                )
+
+            [auctionDetails] => stdClass Object
+                (
+                    [auctionSchedule] => stdClass Object
+                        (
+                            [locationDescription] => On Site
+                            [openingDateTime] => 2018-10-13T04:45:00Z
+                        )
+
+                    [auctionedDate] => 2018-10-13
+                )
+
+        )
+
+    [seoUrl] => https://www.domain.com.au/8-140-hampden-road-abbotsford-nsw-2046-2014642260
+    [virtualTourUrl] => 
+)
+
