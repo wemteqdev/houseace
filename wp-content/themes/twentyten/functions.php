@@ -38,6 +38,27 @@
  * @since Twenty Ten 1.0
  */
 
+// Add the custom columns to the book post type:
+add_filter( 'manage_listing_posts_columns', 'set_custom_edit_listing_columns' );
+function set_custom_edit_listing_columns($columns) {
+    unset( $columns['author'] );
+    $columns['bathrooms'] = __( 'Bathrooms', 'houseace' );
+
+    return $columns;
+}
+
+// Add the data to the custom columns for the book post type:
+add_action( 'manage_listing_posts_custom_column' , 'custom_book_column', 10, 2 );
+function custom_book_column( $column, $post_id ) {
+    switch ( $column ) {
+
+        case 'bathrooms' :
+            echo get_post_meta( $post_id , 'bathrooms' , true ); 
+            break;
+
+    }
+}
+
 /*
  * Set the content width based on the theme's design and stylesheet.
  *

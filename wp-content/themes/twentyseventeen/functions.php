@@ -9,6 +9,42 @@
  * @since 1.0
  */
 
+// Add the custom columns to the listing post type:
+add_filter( 'manage_listing_posts_columns', 'set_custom_edit_listing_columns' );
+function set_custom_edit_listing_columns($columns) {
+    unset( $columns['author'] );
+    unset( $columns['date'] );
+
+    $columns['bedrooms'] = __( 'Bedrooms', 'houseace' );
+    $columns['bathrooms'] = __( 'Bathrooms', 'houseace' );
+    $columns['status'] = __( 'Status', 'houseace' );
+    $columns['auctioned_date'] = __( 'Auctioned Date', 'houseace' );
+    $columns['date'] = __( 'Date', 'houseace' );
+
+    return $columns;
+}
+
+// Add the data to the custom columns for the listing post type:
+add_action( 'manage_listing_posts_custom_column' , 'custom_listing_column', 10, 2 );
+function custom_listing_column( $column, $post_id ) {
+    switch ( $column ) {
+
+        case 'bedrooms' :
+            echo get_post_meta( $post_id , 'bedrooms' , true ); 
+            break;
+        case 'bathrooms' :
+            echo get_post_meta( $post_id , 'bathrooms' , true ); 
+            break;
+        case 'status' :
+            echo get_post_meta( $post_id , 'status' , true ); 
+            break;
+        case 'auctioned_date' :
+            echo get_post_meta( $post_id , 'auctioned_date' , true ); 
+            break;
+
+    }
+}
+
 /**
  * Twenty Seventeen only works in WordPress 4.7 or later.
  */
