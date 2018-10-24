@@ -9,6 +9,31 @@
  * @since 1.0
  */
 
+add_action( 'rest_api_init', 'create_api_posts_meta_field' );
+ 
+function create_api_posts_meta_field() {
+ 
+ // register_rest_field ( 'name-of-post-type', 'name-of-field-to-return', array-of-callbacks-and-schema() )
+ register_rest_field( 'listing', 'post-meta-fields', array(
+ 'get_callback' => 'list_get_post_meta_cb',
+ 'update_callback' => 'list_update_post_meta_cb',
+ 'schema' => null,
+ )
+ );
+}
+
+function list_update_post_meta_cb($value, $object, $field_name){
+  return update_post_meta($object['id'], $field_name, $value); 
+}
+
+function list_get_post_meta_cb( $object ) {
+ //get the id of the post object array
+ $post_id = $object['id'];
+ 
+ //return the post meta
+ return get_post_meta( $post_id );
+}
+
 // Add the custom columns to the listing post type:
 add_filter( 'manage_listing_posts_columns', 'set_custom_edit_listing_columns' );
 function set_custom_edit_listing_columns($columns) {
