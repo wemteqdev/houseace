@@ -67,13 +67,13 @@ class domain_api
 }
 
 $houseace_base_url = "https://houseace.com.au";
-$houseace_authorization_token = 'q929 Cs8K l49A boxt rTue Mc9t';
+$houseace_authorization_token = 'L9gN ea4x JRpG fqwC 1r75 H9Hn';
 
 $houseace_base_url = "https://houseace.wemteq.com";
 $houseace_authorization_token = 'D6Fz 8VCt Q5Nv BMxe MVf0 nOX8';
 
-$houseace_base_url = "http://houseace.loc:8888";
-$houseace_authorization_token = 'q929 Cs8K l49A boxt rTue Mc9t';
+// $houseace_base_url = "http://houseace.loc:8888";
+// $houseace_authorization_token = 'q929 Cs8K l49A boxt rTue Mc9t';
 
 // prepare sales api client to pull sales results from domain.com.au
 $sales_client_id = 'client_538dd6d34c31418795c03e850d58b81c';
@@ -103,7 +103,7 @@ $listings_client_secrets = 'secret_7e2b4ce9a8608ad91394e9b89e32758f';
 
 $listings_api = new domain_api($listings_client_id, $listings_client_secrets);
 $listings_api->authorize();
-sleep(2);
+sleep(3);
 
 
 //$wp_headers = array (
@@ -162,7 +162,7 @@ foreach($listings_json as $listing)
     // get listing detail from domain.com.au
     $listing_data = $listings_api->getRequest('https://api.domain.com.au/v1/listings/' . $listing->id);
     $listing_json = json_decode($listing_data);
-    sleep(2);
+    sleep(3);
 
     if(!isset($listing_json->id)){
         print("Listing not found in domain.com.au \n");
