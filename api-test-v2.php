@@ -7,7 +7,7 @@
     // install custom post type ui - set rest api true, rest api slug to 'listings'
 
     $headers = array (
-        'Authorization' => 'Basic ' . base64_encode( 'admin' . ':' . '1vdR 4lVM ccLX 00zn suaK kVNr'  ),
+        'Authorization' => 'Basic ' . base64_encode( 'admin' . ':' . 'q929 Cs8K l49A boxt rTue Mc9t'  ),
     );
 
     // $domain_id = 1;
@@ -31,22 +31,24 @@
     // exit;
 
 
-    $id = 1;
-    $url = 'https://houseace.wemteq.com/wp-json/wp/v2/posts/' . $id  ;
-
-    print($url . "\n");
+    $post_id = 72;
 
     $data = array(
-        'title' => 'test test',
-        '_knawatfibu_url' => 'http://image.com'
+        'title' => 'test',
+        'field[bedrooms]' => 111
     );
+
+    $url = 'http://houseace.loc:8888/wp-json/wq/v2/listings/' . $post_id;
+    $url = 'http://houseace.loc:8888/wp-json/wq/v2/listings/';
+
+    $url = 'http://houseace.loc:8888/wp-json/wq/v2/listings/' . $post_id;
 
     $response = wp_remote_post( $url, array (
         'method'  => 'POST',
+        'timeout' => 45,
         'headers' => $headers,
         'body'    =>  $data
     ));
 
 
-    print_r($response);
-
+    echo($response['body']);
