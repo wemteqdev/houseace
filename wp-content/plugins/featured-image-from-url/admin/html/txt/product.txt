@@ -1,0 +1,13 @@
+{
+	"name": "Featured Image from URL",
+	"meta_data": [
+		{
+			"key": "fifu_image_url",
+			"value": "https://ps.w.org/featured-image-from-url/assets/icon-256x256.png"
+		},    
+		{
+			"key": "fifu_image_alt",
+			"value": "Logo"
+		}
+	]
+}

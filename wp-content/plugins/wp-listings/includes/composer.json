@@ -1,0 +1,5 @@
+{
+  "require-dev": {
+    "wpreadme2markdown/wpreadme2markdown": "*"
+  }
+}

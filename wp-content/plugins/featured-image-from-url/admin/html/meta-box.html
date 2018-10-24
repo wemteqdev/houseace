@@ -1,0 +1,76 @@
+<script><?php include 'js/meta-box.js' ?></script>
+<script><?php include 'js/convert-url.js' ?></script>
+
+<!-- show alt field, image and link if URL was already provided -->
+
+<input id="fifu_input_alt" 
+       type="text" 
+       name="fifu_input_alt" 
+       placeholder="alt/title attribute (optional)" 
+       value="<?php echo $alt; ?>" 
+       style="<?php echo $width, $margin, $show_alt ?>" />
+
+<div id="fifu_image"
+     style="<?php echo $height, $margin, $show_image ?> 
+     background:url('<?php echo $url; ?>') no-repeat center center; 
+     background-size:cover;" >
+</div>
+
+<input id="fifu_input_url" 
+       type="text" 
+       name="fifu_input_url" 
+       placeholder="URL" 
+       value="<?php echo $url; ?>"
+       style="<?php echo $width, $margin ?>" />
+
+<p/>
+<center>
+    <a id="fifu_link" 
+       href="#" 
+       onClick="removeImage();" 
+       style="<?php echo $show_link ?>" >remove external featured image</a>
+</center>
+
+<!-- show preview button if URL was not provided yet -->
+
+<a id="fifu_button" 
+   class="button" 
+   onClick="previewImage();" 
+   style="<?php echo $align, $margin, $show_button ?>" >Preview</a>
+
+<a id="sirv-add-featured-image"
+   active="<?php echo $is_sirv_active; ?>"
+   data-input-anchor="#fifu_input_url"
+   href="#"
+   class="button sirv-add-image-modal-click"
+   title="Add image from Sirv"
+   style="<?php echo $show_sirv ?>">Choose Sirv image</a>
+
+
+<div style="<?php echo $show_news ?>">
+    <br>
+    <hr>
+    <p style="font-size: 12px; padding: 5px; border-left: 6px solid #b20ab8; color: black;
+       background-color: #eee; border-radius: 25px 5px;">New: WooCommerce <a href="admin.php?page=featured-image-from-url#variable">Product Variable</a> support (<a href="https://shop.featuredimagefromurl.com/product/variable-product/">live preview</a>)</p>
+    <p style="font-size: 12px; padding: 5px; border-left: 6px solid navy; color: black;
+       background-color: #eee; border-radius: 25px 5px;">New: supports Tumblr videos now</p>
+    <p style="font-size: 12px; padding: 5px; border-left: 6px solid orange; color: black;
+       background-color: #eee; border-radius: 25px 5px;">New: if the Alt/Title field is empty then automatically set that with the post/page/product title</p>
+    <p style="font-size: 12px; padding: 5px; border-left: 6px solid chartreuse; color: black;
+       background-color: #eee; border-radius: 25px 5px;">What should be the next plugin feature? Vote <a href="https://goo.gl/forms/TxLdhwXTqsuO5BHg2">here</a>.</p>
+    <!--p style="font-size: 12px; padding: 5px; border-left: 6px solid #3627c2; color: black;
+       background-color: #eee; border-radius: 25px 5px;">New: apply a <b><a href="admin.php?page=featured-image-from-url#css">CSS Style</a></b> to all your external featured images. It's a free feature now (16% of <a href="https://goo.gl/forms/TxLdhwXTqsuO5BHg2">votes</a>)</p-->
+    <center>
+        <table>
+            <tbody>
+                <tr>
+                    <th>premium live preview:</th>
+                    <th><a href="https://blog.featuredimagefromurl.com/">blog
+                        </a></th>
+                    <th><a href="https://shop.featuredimagefromurl.com/">shop
+                        </a></th>
+                </tr>
+            </tbody>
+        </table>
+    </center>
+</div>

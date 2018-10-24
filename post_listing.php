@@ -10,6 +10,7 @@
         'Authorization' => 'Basic ' . base64_encode( 'admin' . ':' . '1vdR 4lVM ccLX 00zn suaK kVNr'  ),
     );
 
+    /*
     $domain_id = 111;
 
     $filters = array(
@@ -29,10 +30,10 @@
     print_r(count($listing));
 
     exit;
+     */
 
-
-    $id = 42;
-    $url = rest_url( 'wp/v2/listings/' . $id  );
+    $id = 1;
+    $url = rest_url( 'wp/v2/posts/' . $id  );
 
     print($url . '\n');
 

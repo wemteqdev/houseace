@@ -1,0 +1,1534 @@
+<style><?php include 'css/menu.css' ?></style>
+<script><?php include 'js/menu.js' ?></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.min.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<div class="wrap">
+
+    <div class="box">
+        <h1>Featured Image From URL</h1>
+    </div>
+
+    <div class="box">
+        <h2>Help</h2>
+        <div class="greybox">
+            For more information, refer to <a href="https://wordpress.org/plugins/featured-image-from-url/faq/" target="_blank">FAQ</a> and <a href="https://wordpress.org/plugins/featured-image-from-url/screenshots/" target="_blank">screenshots</a>. 
+        </div>
+    </div>
+
+    <div class="box">
+        <h2>Report a Bug or Suggest an Improvement</h2>
+        <div class="greybox">
+            Suggestions for improvement are always welcome. Just send an email to <a href="mailto:support@featuredimagefromurl.com">support@featuredimagefromurl.com</a> and your request can be available in the next release.
+            But if you want to report a bug, please provide as many details as possible such as plugin version, screenshots, JS errors on browser console, PHP errors in debug file, domain etc. 
+            The most common related problem is that the images aren't shown on public area. And in 90% of times it's caused because of errors in another plugin.
+        </div>
+    </div>
+
+    <div class="box">
+
+        <h2>Auto Set Featured Image: configuration</h2>
+        <div class="greybox" id="grad1">
+            Perfect for external posts, this option allows to use the first image from a post/page/product content as featured image. It will happen when you click on Publish/Update button.
+        </div>
+
+        <br>
+
+        <table style="text-align:left">
+            <tr>
+                <th>
+                    <form 
+                        id="fifu_form_get_first" 
+                        action="javascript:void(0)" 
+                        method="post">
+                        <input 
+                            type="image" 
+                            href="javascript:void(0)" 
+                            id="fifu_toggle_get_first" 
+                            onclick="invert('get_first')" 
+                            name="fifu_toggle_get_first" 
+                            class="<?php echo $enable_get_first; ?>" 
+                            value="" style="display:block">
+
+                        <input 
+                            type="hidden" 
+                            id="fifu_input_get_first" 
+                            name="fifu_input_get_first" 
+                            value="" >
+                    </form>
+                </th>
+                <th>   
+                    use the first image as featured image
+                </th>
+            </tr> 
+            <tr>
+                <th>
+                    <form 
+                        id="fifu_form_pop_first" 
+                        action="javascript:void(0)" 
+                        method="post">
+                        <input 
+                            type="image" 
+                            href="javascript:void(0)" 
+                            id="fifu_toggle_pop_first" 
+                            onclick="invert('pop_first')" 
+                            name="fifu_toggle_pop_first" 
+                            class="<?php echo $enable_pop_first; ?>" 
+                            value="" style="display:block">
+
+                        <input 
+                            type="hidden"
+                            id="fifu_input_pop_first" 
+                            name="fifu_input_pop_first" 
+                            value="" >
+                    </form>
+                </th>
+                <th>   
+                    hide the first image from content
+                </th>
+            </tr>        
+            <tr>
+                <th>
+                    <form 
+                        id="fifu_form_ovw_first" 
+                        action="javascript:void(0)" 
+                        method="post">
+                        <input 
+                            type="image" 
+                            href="javascript:void(0)" 
+                            id="fifu_toggle_ovw_first" 
+                            onclick="invert('ovw_first')" 
+                            name="fifu_toggle_ovw_first" 
+                            class="<?php echo $enable_ovw_first; ?>" 
+                            value="" style="display:block">
+
+                        <input 
+                            type="hidden"
+                            id="fifu_input_ovw_first" 
+                            name="fifu_input_ovw_first" 
+                            value="" >
+                    </form>
+                </th>
+                <th>   
+                    overwrite the existing external featured image
+                </th>
+            </tr>      
+        </table>
+
+    </div>
+
+    <div class="box">
+        <h2>Custom Post Types</h2>
+        <div class="greybox" id="grad1">
+            Featured Image from URL is preconfigured to work with only one Custom Post Type (WooCommerce Product). But you also can use this plugin with other ones. For that, you just need to know the correct Custom Post Type names and fill the fields below. Please, let me know if you need more than 5 inputs here.
+        </div>
+        <br>
+
+        <form 
+            id="fifu_form_cpt" 
+            action="javascript:void(0)" 
+            method="post">
+            <input id="fifu_input_cpt0" type="text" name="fifu_input_cpt0" style="width:130px" value="<?php echo $array_cpt[0]; ?>">
+            <input id="fifu_input_cpt1" type="text" name="fifu_input_cpt1" style="width:130px" value="<?php echo $array_cpt[1]; ?>">
+            <input id="fifu_input_cpt2" type="text" name="fifu_input_cpt2" style="width:130px" value="<?php echo $array_cpt[2]; ?>">
+            <input id="fifu_input_cpt3" type="text" name="fifu_input_cpt3" style="width:130px" value="<?php echo $array_cpt[3]; ?>">
+            <input id="fifu_input_cpt4" type="text" name="fifu_input_cpt4" style="width:130px" value="<?php echo $array_cpt[4]; ?>">
+            <input type="submit" value="Submit" >
+        </form>
+    </div>
+
+    <a name="css"></a>
+
+    <div class="box">
+        <h2>CSS Style</h2>
+        <div class="greybox" id="grad1">
+            Here you can define a CSS style to be applied to all external featured images. Usage example:<br><br>
+            width: 100%; border-radius: 8px; border: 1px solid #ddd; padding: 5px;
+            <br><br>
+            <i>If this new FREE feature is useful to you, please cherish my work. Give FIFU a <a href="https://wordpress.org/support/view/plugin-reviews/featured-image-from-url?filter=5" target="_blank">5-star</a> rating!</i>         
+        </div>
+        <br>
+        <form 
+            id="fifu_form_css" 
+            action="javascript:void(0)" 
+            method="post">
+
+            <input id="fifu_input_css" 
+                   type="text" 
+                   name="fifu_input_css" 
+                   style="width:675px" 
+                   value="<?php echo $css_style; ?>">
+
+            <input type="submit" 
+                   value="Submit" >
+        </form>
+    </div>    
+
+    <div class="box">
+        <h2>Default External Featured Image</h2>
+        <div class="greybox">
+            Here you can define the URL of a default external featured image that will be shown when you create/update a post/page/product without an internal/external featured image. 
+        </div>
+        <br>
+        <form 
+            id="fifu_form_default_url" 
+            action="javascript:void(0)" 
+            method="post">
+
+            <input id="fifu_input_default_url" 
+                   type="text" 
+                   name="fifu_input_default_url" 
+                   style="width:675px" 
+                   value="<?php echo $default_url; ?>">
+
+            <input type="submit" 
+                   value="Submit" >
+        </form>
+    </div>
+
+    <div class="box">
+        <h2>Fake Internal Featured Image</h2>
+        <div class="greybox" id="grad1">
+            Even though FIFU works fine with the most of themes/plugins, some of them are not able to show the external featured image if there is no internal featured image associated to your post/page/product. Enabling the toggle below, a symbolic empty file will be added to your Media Library as an attempt to overcome that limitation.
+        </div>
+        <p/>
+        <form 
+            id="fifu_form_fake" 
+            action="javascript:void(0)" 
+            method="post">
+            <input 
+                type="image" 
+                href="javascript:void(0)" 
+                id="fifu_toggle_fake" 
+                onclick="invert('fake')" 
+                name="fifu_toggle_fake" 
+                class="<?php echo $enable_fake; ?>" 
+                value="" 
+                style="display:block" >
+            <input 
+                type="hidden" 
+                id="fifu_input_fake" 
+                name="fifu_input_fake" 
+                value="" >
+        </form>
+    </div>
+
+    <div class="box">
+        <h2>Featured Image Column</h2>
+        <div class="greybox" id="grad1">
+            The plugin adds a new column "FIFU" (Featured Image from URL) to your table of posts/pages/products in admin area. Below you can choose the height (px) of the image in the column. To disable that, just uncheck "FIFU" in the Screen Options.
+        </div>
+        <br>
+        <form 
+            id="fifu_form_column" 
+            action="javascript:void(0)" 
+            method="post">
+            <input id="fifu_input_column_height" type="text" name="fifu_input_column_height"  value="<?php echo $column_height; ?>" placeholder="e.g.: 64" size="4">
+            <input type="submit" value="Submit" >
+        </form>
+    </div>
+
+    <div class="box">
+        <h2>Featured Image in Content</h2>
+        <div class="greybox" id="grad1">
+            It will sound crazy, but some themes don't show the Featured Image on the posts or pages. If it is your case and you would like to show the Featured Image there, just enable the toggle. The Featured Image will appear at the beginning of the content, before the text.
+        </div>
+        <br>
+        <form 
+            id="fifu_form_content" 
+            action="javascript:void(0)" 
+            method="post">
+            <input 
+                type="image" 
+                href="javascript:void(0)" 
+                id="fifu_toggle_content" 
+                onclick="invert('content')" 
+                name="fifu_toggle_content" 
+                class="<?php echo $enable_content; ?>" 
+                value=""
+                style="display:block">
+            <input 
+                type="hidden" 
+                id="fifu_input_content" 
+                name="fifu_input_content" 
+                value="" >
+        </form>
+    </div>
+
+    <div class="box">
+        <h2>Hide Featured Media</h2>
+        <div class="greybox" id="grad1">
+            Enable the toggle if you want to hide the external featured image/video/slider on posts/pages but keeping its visibility on home.
+        </div>
+        <br>
+        <table style="text-align:left">
+            <tr>
+                <th>
+                    <form 
+                        id="fifu_form_hide_page" 
+                        action="javascript:void(0)" 
+                        method="post">
+                        <input 
+                            type="image" 
+                            href="javascript:void(0)" 
+                            id="fifu_toggle_hide_page" 
+                            onclick="invert('hide_page')" 
+                            name="fifu_toggle_hide_page" 
+                            class="<?php echo $enable_hide_page; ?>" 
+                            value="" style="display:block">
+
+                        <input 
+                            type="hidden" 
+                            id="fifu_input_hide_page" 
+                            name="fifu_input_hide_page" 
+                            value="" >
+                    </form>
+                </th>
+                <th>   
+                    on page
+                </th>
+            </tr> 
+            <tr>
+                <th>
+                    <form 
+                        id="fifu_form_hide_post" 
+                        action="javascript:void(0)" 
+                        method="post">
+                        <input 
+                            type="image" 
+                            href="javascript:void(0)" 
+                            id="fifu_toggle_hide_post" 
+                            onclick="invert('hide_post')" 
+                            name="fifu_toggle_hide_post" 
+                            class="<?php echo $enable_hide_post; ?>" 
+                            value="" style="display:block">
+
+                        <input 
+                            type="hidden"
+                            id="fifu_input_hide_post" 
+                            name="fifu_input_hide_post" 
+                            value="" >
+                    </form>
+                </th>
+                <th>   
+                    on post
+                </th>
+            </tr>            
+        </table>
+    </div>
+
+    <div class="box">
+        <h2>Lazy Load</h2>
+        <div class="greybox" id="grad1">
+            Enabling this feature the images/videos won't be loaded until user scrolls to them. So it will make your home/shop load faster.
+        </div>
+        <br>
+        <form 
+            id="fifu_form_lazy" 
+            action="javascript:void(0)" 
+            method="post">
+            <input 
+                type="image" 
+                href="javascript:void(0)" 
+                id="fifu_toggle_lazy" 
+                onclick="invert('lazy')" 
+                name="fifu_toggle_lazy" 
+                class="<?php echo $enable_lazy; ?>" 
+                value=""
+                style="display:block">
+            <input 
+                type="hidden" 
+                id="fifu_input_lazy" 
+                name="fifu_input_lazy" 
+                value="" >
+        </form>
+    </div>
+
+    <a name="priority"></a>
+
+    <div class="box">
+        <h2>Priority</h2>
+        <div class="greybox" id="grad1">
+            Enable the toggle below to prioritize the internal image rather than the external one, if both exist.
+        </div>
+        <br>
+        <table style="text-align:left">
+            <tr>
+                <th>
+                    <form 
+                        id="fifu_form_priority" 
+                        action="javascript:void(0)" 
+                        method="post">
+                        <input 
+                            type="image" 
+                            href="javascript:void(0)" 
+                            id="fifu_toggle_priority" 
+                            onclick="invert('priority')" 
+                            name="fifu_toggle_priority" 
+                            class="<?php echo $enable_priority; ?>" 
+                            value=""
+                            style="display:block">
+
+                        <input 
+                            type="hidden"
+                            id="fifu_input_priority" 
+                            name="fifu_input_priority" 
+                            value="" >
+                    </form>
+                </th>
+                <th>   
+                    prioritize the internal image
+                </th>
+            </tr>             
+        </table>
+    </div>
+
+    <div class="box">
+        <h2>Social Tags</h2>
+        <div class="greybox" id="grad1">
+            Featured Image from URL provides social tags to share the external images on the social networks. Here you can enable/disable this feature.
+        </div>
+        <br>
+        <form 
+            id="fifu_form_social" 
+            action="javascript:void(0)" 
+            method="post">
+            <input 
+                type="image" 
+                href="javascript:void(0)" 
+                id="fifu_toggle_social" 
+                onclick="invert('social')" 
+                name="fifu_toggle_social" 
+                class="<?php echo $enable_social; ?>" 
+                value=""
+                style="display:block">
+            <input 
+                type="hidden" 
+                id="fifu_input_social" 
+                name="fifu_input_social" 
+                value="" >
+        </form>
+    </div>
+
+    <div class="box">
+        <h2>WooCommerce</h2>
+        <div class="greybox" id="grad1">
+            You can disable the product lightbox and zoom here once these features are only compatible with the premium version.
+        </div>
+        <br>
+        <table style="text-align:left">
+            <tr>
+                <th>
+                    <form 
+                        id="fifu_form_wc_lbox" 
+                        action="javascript:void(0)" 
+                        method="post">
+                        <input 
+                            type="image" 
+                            href="javascript:void(0)" 
+                            id="fifu_toggle_wc_lbox" 
+                            onclick="invert('wc_lbox')" 
+                            name="fifu_toggle_wc_lbox" 
+                            class="<?php echo $enable_wc_lbox; ?>" 
+                            value=""
+                            style="display:block">
+
+                        <input 
+                            type="hidden" 
+                            id="fifu_input_wc_lbox" 
+                            name="fifu_input_wc_lbox" 
+                            value="" >
+                    </form>
+                </th>
+                <th>   
+                    lightbox
+                </th>
+            </tr> 
+            <tr>
+                <th>
+                    <form 
+                        id="fifu_form_wc_zoom" 
+                        action="javascript:void(0)" 
+                        method="post">
+                        <input 
+                            type="image" 
+                            href="javascript:void(0)" 
+                            id="fifu_toggle_wc_zoom" 
+                            onclick="invert('wc_zoom')" 
+                            name="fifu_toggle_wc_zoom" 
+                            class="<?php echo $enable_wc_zoom; ?>" 
+                            value=""
+                            style="display:block">
+
+                        <input 
+                            type="hidden" 
+                            id="fifu_input_wc_zoom" 
+                            name="fifu_input_wc_zoom" 
+                            value="" >
+                    </form>
+                </th>
+                <th>   
+                    zoom
+                </th>
+            </tr>              
+        </table>
+    </div>
+
+    <div class="box">
+        <h2>WP All Import</h2>
+        <div class="greybox" id="grad1">
+            You can use Featured Image from URL with WP All Import plugin. For that, use the custom field <b>fifu_image_url</b>.<br/><br/> The other custom fields supported by FIFU are listed below, in the section WP REST API > Plugin Fields.
+            <br/><br/>
+            <div class="greybox" id="grad2">
+                <b>Premium feature</b><br><br>But if you have a list of URLs delimited by "|", it's possible to use that with the custom field <b>fifu_list_url</b>. In this case, the first image will be considered the featured image and the others will be in the product image gallery. For sliders, use <b>fifu_slider_list_url</b>.
+            </div>
+        </div>
+    </div>
+
+    <a name="all"></a>
+
+    <div class="box">
+        <h2>Auto Set Featured Image: apply to all</h2>
+        <div class="greybox" id="grad2">
+            <b>Premium feature</b><br><br>
+            Enable that to update all your posts/pages/products applying the configuration above. Very useful if you have hundreds of them and want to set the first image as featured image for all. To repeat/continue the process enable the toggle again. It can take several minutes and you can monitor the progress here. It can't be undone, so make a backup.
+            <br><br>
+            To schedule this process (hourly, daily etc), you can use the Hook <b>fifu_event</b> with your favorite cron event plugin. I like <a href="https://wordpress.org/plugins/wp-crontrol/">WP Control</a>. 
+        </div>
+        <br>
+        <table style="text-align:left">
+            <tr>
+                <th>
+                    <input type="text" value="" style="width:35px">
+                    <input type="submit" value="OK" >
+                </th>
+                <th>   
+                    posts per second (high values can bring down your database)
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <input 
+                        type="image" 
+                        href="javascript:void(0)" 
+                        class="toggleoff" 
+                        value=""
+                        style="display:block">
+                </th>
+                <th>   
+                    ignore posts that already have an external featured image
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <input 
+                        type="image" 
+                        href="javascript:void(0)" 
+                        class="toggleoff" 
+                        value=""
+                        style="display:block">
+                </th>
+                <th>   
+                    update all your posts/pages/products now
+                </th>
+                <th>   
+                    <div id='fifu_ajax_update_all'><b>Status: </b></div>
+                </th>
+            </tr>             
+        </table>
+    </div>
+
+    <a name="category"></a>
+    <div class="box">
+        <h2>Auto Set Product Category Images</h2>
+        <div class="greybox" id="grad2">
+            <b>Premium feature</b><br><br>
+            Enable the toggle below to set one external image to each product category. The image will be chosen among the external product images from that category.
+
+        </div>
+        <br>
+        <table style="text-align:left">
+            <tr>
+                <th>
+                    <input 
+                        type="image" 
+                        href="javascript:void(0)" 
+                        class="toggleoff" 
+                        value=""
+                        style="display:block">
+                </th>
+                <th>   
+                    set category images
+                </th>
+            </tr>             
+        </table>
+    </div>
+
+    <div class="box">
+        <h2>Crop images to the same size</h2>
+        <div class="greybox" id="grad2">
+            <b>Premium feature</b><br><br>
+            If you are not happy with the different sizes of external featured images on your home/shop, enable the toggle below to crop them to the same size.
+        </div>
+        <br>
+
+        <div id="accordionCrop">
+
+            <h3>crop images</h3> 
+            <div>       
+                <input 
+                    type="image" 
+                    href="javascript:void(0)" 
+                    class="toggleoff" 
+                    value=""
+                    style="display:block">
+                <br>
+                P.S.: if the crop doesn't work, use a Selector to inform where is the group of external images that you want to crop. 
+            </div>
+
+            <h3>inform a Selector</h3>    
+            <div>
+                Examples of valid selectors: <b>#</b><i>products</i> (if the element <b>id</b>="<i>products</i>"), <b>.</b><i>my-post-area</i> (if the element <b>class</b>="<i>my-post-area</i>")
+                <br>
+                <br>
+                <input id="fifu_input_crop0" 
+                       type="text" 
+                       placeholder="selector 1"
+                       style="width:130px" 
+                       value="">
+                <input id="fifu_input_crop1" 
+                       type="text" 
+                       placeholder="selector 2"
+                       style="width:130px" 
+                       value="">
+                <input id="fifu_input_crop2" 
+                       type="text" 
+                       placeholder="selector 3"
+                       style="width:130px" 
+                       value="">
+                <input id="fifu_input_crop3" 
+                       type="text" 
+                       placeholder="selector 4"
+                       style="width:130px" 
+                       value="">
+                <input id="fifu_input_crop4" 
+                       type="text" 
+                       placeholder="selector 5"
+                       style="width:130px" 
+                       value="">                           
+                <input type="submit" 
+                       value="Submit" disabled>
+            </div>
+        </div>
+    </div>
+
+    <div class="box">
+        <h2>External Featured Videos</h2>
+        <div class="greybox" id="grad2">
+            <b>Premium feature</b><br><br>
+            The default value applied to the videos is "100%" and it usually works fine. However, here you can define the max size (px, cm etc) of the featured videos at different screens and the ratio for these videos as well.<br><br>
+            <table style="text-align:left">
+                <tr>
+                    <th>   
+                        Ratio:
+                    </th>
+                    <th>
+                        <input id="fifu_input_video_width_rtio" 
+                               name="fifu_input_video_width_rtio" 
+                               size="4">
+                    </th>
+                    <th>
+                        <input id="fifu_input_video_height_rtio" 
+                               name="fifu_input_video_height_rtio" 
+                               size="4">
+                    </th>
+                    <th>
+                        <div style="font-style: italic;font-weight:normal;">e.g.: 1, 2, 3...</div>
+                    </th>
+                </tr> 
+                <tr>
+                    <th>   
+                        Margin Bottom:
+                    </th>
+                    <th>
+                        <input id="fifu_input_video_margin_bottom" 
+                               name="fifu_input_video_margin_bottom" 
+                               size="4">
+                    </th>
+                    <th>
+                        <div style="font-style: italic;font-weight:normal;">e.g.: 10px, 1cm...</div>
+                    </th>
+                </tr>
+                <tr>
+                    <th>   
+                        Vertical Margin:
+                    </th>
+                    <th>
+                        <input id="fifu_input_video_vertical_margin" 
+                               name="fifu_input_video_vertical_margin"
+                               size="4">
+                    </th>
+                    <th>
+                        <div style="font-style: italic;font-weight:normal;">e.g.: 10px, 1cm...</div>
+                    </th>
+                </tr>                    
+                <tr>
+                    <th>   
+                        Archive:
+                    </th>
+                    <th>
+                        <input id="fifu_input_video_width_arch" 
+                               name="fifu_input_video_width_arch" 
+                               placeholder="max-width" 
+                               size="4">
+                    </th>
+                    <th>
+                        <input id="fifu_input_video_height_arch" 
+                               name="fifu_input_video_height_arch" 
+                               placeholder="max-height" 
+                               size="4">
+                    </th>
+                    <th>
+                        <div style="font-style: italic;font-weight:normal;">e.g.: 300px, 8cm...</div>
+                    </th>
+                </tr> 
+                <tr>
+                    <th>   
+                        Category:
+                    </th>
+                    <th>
+                        <input id="fifu_input_video_width_ctgr" 
+                               name="fifu_input_video_width_ctgr" 
+                               placeholder="max-width" 
+                               size="4">
+                    </th>
+                    <th>
+                        <input id="fifu_input_video_height_ctgr" 
+                               name="fifu_input_video_height_ctgr" 
+                               placeholder="max-height" 
+                               size="4">
+                    </th>
+                    <th>
+                        <div style="font-style: italic;font-weight:normal;">e.g.: 300px, 8cm...</div>
+                    </th>
+                </tr> 
+                <tr>
+                    <th>   
+                        Home:
+                    </th>
+                    <th>
+                        <input id="fifu_input_video_width_home" 
+                               name="fifu_input_video_width_home" 
+                               placeholder="max-width" 
+                               size="4">
+                    </th>
+                    <th>
+                        <input id="fifu_input_video_height_home" 
+                               name="fifu_input_video_height_home" 
+                               placeholder="max-height" 
+                               size="4">
+                    </th>
+                    <th>
+                        <div style="font-style: italic;font-weight:normal;">e.g.: 300px, 8cm...</div>
+                    </th>
+                </tr>
+                <tr>
+                    <th>   
+                        Page:
+                    </th>
+                    <th>
+                        <input id="fifu_input_video_width_page" 
+                               name="fifu_input_video_width_page" 
+                               placeholder="max-width" 
+                               size="4">
+                    </th>
+                    <th>
+                        <input id="fifu_input_video_height_page" 
+                               name="fifu_input_video_height_page" 
+                               placeholder="max-height" 
+                               size="4">
+                    </th>
+                    <th>
+                        <div style="font-style: italic;font-weight:normal;">e.g.: 300px, 8cm...</div>
+                    </th>
+                </tr> 
+                <tr>
+                    <th>   
+                        Post:
+                    </th>
+                    <th>
+                        <input id="fifu_input_video_width_post" 
+                               name="fifu_input_video_width_post" 
+                               placeholder="max-width" 
+                               size="4">
+                    </th>
+                    <th>
+                        <input id="fifu_input_video_height_post" 
+                               name="fifu_input_video_height_post" 
+                               placeholder="max-height" 
+                               size="4">
+                    </th>
+                    <th>
+                        <div style="font-style: italic;font-weight:normal;">e.g.: 300px, 8cm...</div>
+                    </th>
+                </tr> 
+                <tr>
+                    <th>   
+                        Product:
+                    </th>
+                    <th>
+                        <input id="fifu_input_video_width_prod" 
+                               name="fifu_input_video_width_prod" 
+                               placeholder="max-width" 
+                               size="4">
+                    </th>
+                    <th>
+                        <input id="fifu_input_video_height_prod" 
+                               name="fifu_input_video_height_prod" 
+                               placeholder="max-height" 
+                               size="4">
+                    </th>
+                    <th>
+                        <div style="font-style: italic;font-weight:normal;">e.g.: 300px, 8cm...</div>
+                    </th>
+                </tr> 
+                <tr>
+                    <th>   
+                        Shop:
+                    </th>
+                    <th>
+                        <input id="fifu_input_video_width_shop" 
+                               name="fifu_input_video_width_shop" 
+                               placeholder="max-width" 
+                               size="4">
+                    </th>
+                    <th>
+                        <input id="fifu_input_video_height_shop" 
+                               name="fifu_input_video_height_shop" 
+                               placeholder="max-height" 
+                               size="4">
+                    </th>
+                    <th>
+                        <div style="font-style: italic;font-weight:normal;">e.g.: 300px, 8cm...</div>
+                    </th>
+                </tr>  		          
+            </table>
+            <br>
+        </div>
+        <br>
+        <input type="submit" value="Submit" disabled>
+    </div>
+
+    <div class="box">
+        <h2>External Thumbnails (<a href="https://www.flickr.com/">Flickr</a> Integration): Your Website Faster Than Ever</h2>
+        <div class="greybox" id="grad2">
+            <b>Premium feature</b><br><br>
+            <div id="accordion">
+                <h3>Do you know Flickr?</h3>
+                <div>
+                    <ol>
+                        <li>It's free;</li>
+                        <li>Offers 1000 GB of space;</li>
+                        <li>It's dedicated to store and provide images, probably faster than the most of servers;</li>
+                        <li>Creates automatic copies of your images in <b>many different sizes.</b></li>
+                    </ol>
+                </div>
+                <h3>How does Featured Image From URL take advantage of Flickr?</h3>
+                <div>
+                    Smaller the images, faster your site.<br><br> So the plugin will load the images from Flickr in the exactly size your site needs.
+                    And the result is...<br><br>
+                    <b>The images will be shown with the best quality and the shortest time possible.</b>
+                </div>
+            </div>
+
+            </br>
+            <h3>Getting Flickr URL</h3>
+            <div>
+                You just need to get one URL (Square 75). Use that to fill the External Featured Image field of your post, page or product. The plugin will handle this URL to provide the image in different sizes.<br><br>
+                <img src="https://c1.staticflickr.com/1/745/31593837206_8e081be749_z_d.jpg" style="width:100%"/>
+                <br><br>
+                <img src="https://c1.staticflickr.com/1/223/30820834393_f869fcff49_z_d.jpg" style="width:100%"/>
+            </div>            
+            <h3>Choose the maximum image size for each screen</h3>
+            <table style="text-align:left">
+                <tr>
+                    <th>Archive:&nbsp;</th>
+                    <th>      
+                        <select id="select_flickr_arch" style="font-family:courier;font-size:12px">
+                            <option value=""></option>
+                            <option value="s">&nbsp; 75 x 75</option>
+                            <option value="q">&nbsp;150 x 150</option>
+                            <option value="t">&nbsp;100&nbsp;on longest side</option>
+                            <option value="m">&nbsp;240&nbsp;on longest side</option>
+                            <option value="n">&nbsp;320&nbsp;on longest side</option>
+                            <option value="-">&nbsp;500&nbsp;on longest side</option>
+                            <option value="z">&nbsp;640&nbsp;on longest side</option>
+                            <option value="c">&nbsp;800&nbsp;on longest side</option>
+                            <option value="b">1024&nbsp;on longest side</option>
+                            <option value="h">1600&nbsp;on longest side</option>
+                        </select>
+                    </th> 
+                </tr>
+                <tr>
+                    <th>Cart:&nbsp;</th>
+                    <th>      
+                        <select id="select_flickr_cart" style="font-family:courier;font-size:12px">
+                            <option value=""></option>
+                            <option value="s">&nbsp; 75 x 75</option>
+                            <option value="q">&nbsp;150 x 150</option>
+                            <option value="t">&nbsp;100&nbsp;on longest side</option>
+                            <option value="m">&nbsp;240&nbsp;on longest side</option>
+                            <option value="n">&nbsp;320&nbsp;on longest side</option>
+                            <option value="-">&nbsp;500&nbsp;on longest side</option>
+                            <option value="z">&nbsp;640&nbsp;on longest side</option>
+                            <option value="c">&nbsp;800&nbsp;on longest side</option>
+                            <option value="b">1024&nbsp;on longest side</option>
+                            <option value="h">1600&nbsp;on longest side</option>
+                        </select>
+                    </th> 
+                </tr>
+                <tr>
+                    <th>Category:&nbsp;</th>
+                    <th>      
+                        <select id="select_flickr_ctgr" style="font-family:courier;font-size:12px">
+                            <option value=""></option>
+                            <option value="s">&nbsp; 75 x 75</option>
+                            <option value="q">&nbsp;150 x 150</option>
+                            <option value="t">&nbsp;100&nbsp;on longest side</option>
+                            <option value="m">&nbsp;240&nbsp;on longest side</option>
+                            <option value="n">&nbsp;320&nbsp;on longest side</option>
+                            <option value="-">&nbsp;500&nbsp;on longest side</option>
+                            <option value="z">&nbsp;640&nbsp;on longest side</option>
+                            <option value="c">&nbsp;800&nbsp;on longest side</option>
+                            <option value="b">1024&nbsp;on longest side</option>
+                            <option value="h">1600&nbsp;on longest side</option>
+                        </select>
+                    </th> 
+                </tr>
+                <tr>
+                    <th>Home:&nbsp;</th>
+                    <th>      
+                        <select id="select_flickr_home" style="font-family:courier;font-size:12px">
+                            <option value=""></option>
+                            <option value="s">&nbsp; 75 x 75</option>
+                            <option value="q">&nbsp;150 x 150</option>
+                            <option value="t">&nbsp;100&nbsp;on longest side</option>
+                            <option value="m">&nbsp;240&nbsp;on longest side</option>
+                            <option value="n">&nbsp;320&nbsp;on longest side</option>
+                            <option value="-">&nbsp;500&nbsp;on longest side</option>
+                            <option value="z">&nbsp;640&nbsp;on longest side</option>
+                            <option value="c">&nbsp;800&nbsp;on longest side</option>
+                            <option value="b">1024&nbsp;on longest side</option>
+                            <option value="h">1600&nbsp;on longest side</option>
+                        </select>
+                    </th> 
+                </tr>
+                <tr>
+                    <th>Lightbox:&nbsp;</th>
+                    <th>      
+                        <select id="select_flickr_lbox" style="font-family:courier;font-size:12px">
+                            <option value=""></option>
+                            <option value="s">&nbsp; 75 x 75</option>
+                            <option value="q">&nbsp;150 x 150</option>
+                            <option value="t">&nbsp;100&nbsp;on longest side</option>
+                            <option value="m">&nbsp;240&nbsp;on longest side</option>
+                            <option value="n">&nbsp;320&nbsp;on longest side</option>
+                            <option value="-">&nbsp;500&nbsp;on longest side</option>
+                            <option value="z">&nbsp;640&nbsp;on longest side</option>
+                            <option value="c">&nbsp;800&nbsp;on longest side</option>
+                            <option value="b">1024&nbsp;on longest side</option>
+                            <option value="h">1600&nbsp;on longest side</option>
+                        </select>
+                    </th> 
+                </tr>
+                <tr>
+                    <th>Page:&nbsp;</th>
+                    <th>      
+                        <select id="select_flickr_page" style="font-family:courier;font-size:12px">
+                            <option value=""></option>
+                            <option value="s">&nbsp; 75 x 75</option>
+                            <option value="q">&nbsp;150 x 150</option>
+                            <option value="t">&nbsp;100&nbsp;on longest side</option>
+                            <option value="m">&nbsp;240&nbsp;on longest side</option>
+                            <option value="n">&nbsp;320&nbsp;on longest side</option>
+                            <option value="-">&nbsp;500&nbsp;on longest side</option>
+                            <option value="z">&nbsp;640&nbsp;on longest side</option>
+                            <option value="c">&nbsp;800&nbsp;on longest side</option>
+                            <option value="b">1024&nbsp;on longest side</option>
+                            <option value="h">1600&nbsp;on longest side</option>
+                        </select> 
+                    </th> 
+                </tr>
+                <tr>
+                    <th>Post:&nbsp;</th>
+                    <th>      
+                        <select id="select_flickr_post" style="font-family:courier;font-size:12px">
+                            <option value=""></option>
+                            <option value="s">&nbsp; 75 x 75</option>
+                            <option value="q">&nbsp;150 x 150</option>
+                            <option value="t">&nbsp;100&nbsp;on longest side</option>
+                            <option value="m">&nbsp;240&nbsp;on longest side</option>
+                            <option value="n">&nbsp;320&nbsp;on longest side</option>
+                            <option value="-">&nbsp;500&nbsp;on longest side</option>
+                            <option value="z">&nbsp;640&nbsp;on longest side</option>
+                            <option value="c">&nbsp;800&nbsp;on longest side</option>
+                            <option value="b">1024&nbsp;on longest side</option>
+                            <option value="h">1600&nbsp;on longest side</option>
+                        </select>
+                    </th> 
+                </tr>
+                <tr>
+                    <th>Product:&nbsp;</th>
+                    <th>      
+                        <select id="select_flickr_prod" style="font-family:courier;font-size:12px">
+                            <option value=""></option>
+                            <option value="s">&nbsp; 75 x 75</option>
+                            <option value="q">&nbsp;150 x 150</option>
+                            <option value="t">&nbsp;100&nbsp;on longest side</option>
+                            <option value="m">&nbsp;240&nbsp;on longest side</option>
+                            <option value="n">&nbsp;320&nbsp;on longest side</option>
+                            <option value="-">&nbsp;500&nbsp;on longest side</option>
+                            <option value="z">&nbsp;640&nbsp;on longest side</option>
+                            <option value="c">&nbsp;800&nbsp;on longest side</option>
+                            <option value="b">1024&nbsp;on longest side</option>
+                            <option value="h">1600&nbsp;on longest side</option>
+                        </select>  
+                    </th> 
+                </tr>
+                <tr>
+                    <th>Shop:&nbsp;</th>
+                    <th>      
+                        <select id="select_flickr_shop" style="font-family:courier;font-size:12px">
+                            <option value=""></option>
+                            <option value="s">&nbsp; 75 x 75</option>
+                            <option value="q">&nbsp;150 x 150</option>
+                            <option value="t">&nbsp;100&nbsp;on longest side</option>
+                            <option value="m">&nbsp;240&nbsp;on longest side</option>
+                            <option value="n">&nbsp;320&nbsp;on longest side</option>
+                            <option value="-">&nbsp;500&nbsp;on longest side</option>
+                            <option value="z">&nbsp;640&nbsp;on longest side</option>
+                            <option value="c">&nbsp;800&nbsp;on longest side</option>
+                            <option value="b">1024&nbsp;on longest side</option>
+                            <option value="h">1600&nbsp;on longest side</option>
+                        </select>
+                    </th> 
+                </tr>
+            </table><br>
+        </div>
+    </div>
+
+    <div class="box">
+        <h2>Hover Effects</h2>
+        <div class="greybox" id="grad2">
+            <b>Premium feature</b><br><br>
+            Choose one among 18 hover effects to be applied to all external featured images of your posts on your main page.<br><br>
+        </div>
+        <br>
+        <select id="select_hover" style="width:90%">
+            <option value=""></option>
+            <option value="hover17">315 Degrees</option>
+            <option value="hover02">360 Degrees</option>
+            <option value="hover07">Blur</option>
+            <option value="hover10">Blur Gray Scale</option>
+            <option value="hover04">Brighten</option>
+            <option value="hover15">Circle</option>
+            <option value="hover13">Flashing</option>
+            <option value="hover08">Gray Scale</option>
+            <option value="hover16">Horizontal Rotation</option>
+            <option value="hover12">Opacity Color</option>
+            <option value="hover11">Opacity White</option>
+            <option value="hover18">Rainbow</option>
+            <option value="hover06">Rotate</option>
+            <option value="hover09">Sepia</option>
+            <option value="hover14">Shine</option>
+            <option value="hover05">Vertical Rotation</option>
+            <option value="hover01">Zoom In</option>
+            <option value="hover03">Zoom Out</option>
+        </select>
+        <input type="submit" value="Submit" disabled>
+    </div>
+
+    <div class="box">
+        <h2>Meta boxes: External Galleries and Slider</h2>
+        <div class="greybox" id="grad2">
+            <b>Premium feature</b><br><br>
+            Here you can define the number of fields you will have on the editor for galleries and slider. A huge amount of fields can interfere in the save action time.<br><br>
+            <table style="text-align:left">
+                <tr>
+                    <th>   
+                        <label for="fifu_input_spinner_image" 
+                               placehold>External Image Gallery:</label>
+                    </th>
+                    <th>
+                        <input id="fifu_input_spinner_image" 
+                               name="fifu_input_spinner_image" 
+                               size="4">
+                    </th>
+                </tr>   
+                <tr>
+                    <th>
+                        <label for="fifu_input_spinner_video">External Video Gallery:</label>
+                    </th>
+                    <th>
+                        <input id="fifu_input_spinner_video" 
+                               name="fifu_input_spinner_video" 
+                               size="4">
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="fifu_input_spinner_slider">Slider:</label>
+                    </th>
+                    <th>
+                        <input id="fifu_input_spinner_slider" 
+                               name="fifu_input_spinner_slider" 
+                               size="4">
+                    </th>
+                </tr>    		          
+            </table>
+        </div>
+        <br>
+        <input type="submit" value="Submit" disabled>
+    </div>
+
+    <div class="box">
+        <h2>Product Categories Grid</h2>
+        <div class="greybox" id="grad2">
+            <b>Premium feature</b><br><br>
+            Allows you to use use external images/videos on Product Categories Grid.
+        </div>
+        <br>
+        <input 
+            type="image" 
+            href="javascript:void(0)" 
+            class="toggleoff" 
+            value="" style="display:block">
+    </div>
+
+    <div class="box">
+        <h2>Slider Settings</h2>
+        <div class="greybox" id="grad2">
+            <b>Premium feature</b><br><br>
+            Once you have added the first external image on a post/page/product, the slider meta box will show up. Adding more external images, you have a slider and you can define its settings here.<br><br>
+            <table style="text-align:left">
+                <tr>
+                    <th>
+                        <input 
+                            type="image" 
+                            href="javascript:void(0)" 
+                            id="fifu_toggle_slider_fade" 
+                            name="fifu_toggle_slider_fade" 
+                            class="toggleoff" 
+                            value="" style="display:block">
+                    </th>
+                    <th>   
+                        fade effect
+                    </th>
+                </tr> 
+                <tr>
+                    <th>
+                        <input 
+                            type="image" 
+                            href="javascript:void(0)" 
+                            id="fifu_toggle_slider_stop" 
+                            name="fifu_toggle_slider_stop" 
+                            class="toggleoff" 
+                            value="" style="display:block">
+                    </th>
+                    <th>   
+                        pause autoplay on hover
+                    </th>
+                </tr> 
+                <tr>
+                    <th>
+                        <input 
+                            type="image" 
+                            href="javascript:void(0)" 
+                            id="fifu_toggle_slider_ctrl" 
+                            name="fifu_toggle_slider_ctrl" 
+                            class="toggleoff" 
+                            value="" style="display:block">
+                    </th>
+                    <th>   
+                        show prev/next buttons
+                    </th>
+                </tr> 
+                <tr>
+                    <th>
+                        <input 
+                            type="image" 
+                            href="javascript:void(0)" 
+                            id="fifu_toggle_slider_auto" 
+                            name="fifu_toggle_slider_auto" 
+                            class="toggleoff" 
+                            value="" style="display:block">
+                    </th>
+                    <th>   
+                        start to play automatically
+                    </th>
+                </tr> 
+                <tr>
+                    <th>
+                        <input id="fifu_input_slider_pause" 
+                               name="fifu_input_slider_pause" 
+                               step="500"
+                               size="4">
+                    </th>
+                    <th>   
+                        time between each transition (in ms)
+                    </th>
+                </tr> 
+                <tr>
+                    <th>
+                        <input id="fifu_input_slider_speed" 
+                               name="fifu_input_slider_speed" 
+                               step="500"
+                               max="2000"
+                               size="4">
+                    </th>
+                    <th>   
+                        transition duration (in ms)
+                    </th>
+                </tr> 
+            </table>
+            <br>
+        </div>
+    </div>
+
+    <div class="box">
+        <h2>Validate Images</h2>
+        <div class="greybox" id="grad2">
+            <b>Premium feature</b><br><br>
+            Allows to check image URLs and, when an image is not found, its URL is not saved. However, the validation can make the saving time too long. It is not integrated with Auto Set Featured Image or WP Rest API features yet.
+        </div>
+        <br>
+        <input 
+            type="image" 
+            href="javascript:void(0)" 
+            class="toggleoff" 
+            value="" style="display:block">
+    </div>
+
+    <div class="box">
+        <h2>Video Auto Play</h2>
+        <div class="greybox" id="grad2">
+            <b>Premium feature</b><br><br>
+            This option allows to play a video on "mouseover" and pause it on "mouseout".
+        </div>
+        <br>
+        <table style="text-align:left">
+            <tr>
+                <th>
+                    <input 
+                        type="image" 
+                        href="javascript:void(0)" 
+                        class="toggleoff" 
+                        value=""
+                        style="display:block">
+                </th>
+                <th>   
+                    for YouTube videos
+                </th>
+            </tr> 
+            <tr>
+                <th>
+                    <input 
+                        type="image" 
+                        href="javascript:void(0)" 
+                        class="toggleoff" 
+                        value=""
+                        style="display:block">
+                </th>
+                <th>   
+                    for Vimeo videos
+                </th>
+            </tr>              
+        </table>
+    </div>
+
+    <div class="box">
+        <h2>Video Thumbnail</h2>
+        <div class="greybox" id="grad2">
+            <b>Premium feature</b><br><br>
+            Enable the toggle below to show the video thumbnail instead of the video on home/shop.
+        </div>
+        <br>
+        <input 
+            type="image" 
+            href="javascript:void(0)" 
+            class="toggleoff" 
+            value=""
+            style="display:block">
+        </form>
+    </div>
+
+    <a name="variable"></a>
+
+    <div class="box">
+        <h2>WooCommerce Variable Product</h2>
+        <div class="greybox" id="grad2">
+            <b>Premium feature</b><br><br>
+            Allows to use external images in variations of WooCommerce Variable Products.
+        </div>
+        <br>
+        <form 
+            action="javascript:void(0)" 
+            method="post">
+            <input 
+                type="image" 
+                href="javascript:void(0)" 
+                class="toggleoff" 
+                value="" 
+        </form>
+    </div>
+
+    <div class="box">
+
+        <h2>WP REST API</h2>
+
+        <div class="greybox" id="grad2">
+            <b>Premium feature</b><br><br>
+            <div id="tabsApi">
+                <ul>
+                    <li><a href="#tabs-1">Endpoints</a></li>
+                    <li><a href="#tabs-2">Plugin Fields</a></li>
+                    <li><a href="#tabs-3">Creating your first product...</a></li>
+                    <li><a href="#tabs-4">Creating your first post...</a></li>
+                </ul>
+                <div id="tabs-1">
+                    <table style="text-align:left">
+                        <tr>
+                            <th>			
+                            </th>
+                            <th>								
+                                GET/POST
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Shop</th>
+                            <th>
+                                http://yourdomain.com/wp-json/wc/v2/products
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Blog</th>
+                            <th>
+                                http://yourdomain.com/wp-json/wp/v2/posts
+                            </th>
+                        </tr>
+                    </table>
+                    <br>
+                    <br>
+                    <table style="text-align:left">
+                        <tr>
+                            <th>			
+                            </th>
+                            <th>								
+                                GET/PUT/DELETE
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Shop</th>
+                            <th>
+                                http://yourdomain.com/wp-json/wc/v2/products/{id}
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Blog</th>
+                            <th>
+                                http://yourdomain.com/wp-json/wp/v2/posts/{id}
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+
+                <div id="tabs-2">
+                    <table style="text-align:left">
+                        <tr>
+                            <th>
+                            <th>
+                                Key
+                            </th>
+                            <th>
+                                Key
+                            </th>
+                            <th>
+                                Key
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                Image
+                            </th>
+                            <th>
+                                fifu_image_url
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                Alt
+                            </th>
+                            <th>
+                                fifu_image_alt
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                Video
+                            </th>
+                            <th>
+                                fifu_video_url
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                Image Gallery
+                            </th>
+                            <th>
+                                fifu_image_url_0
+                            </th>
+                            <th>
+                                fifu_image_url_1
+                            </th>
+                            <th>
+                                ...
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                Video Gallery
+                            </th>
+                            <th>
+                                fifu_video_url_0
+                            </th>
+                            <th>
+                                fifu_video_url_1
+                            </th>
+                            <th>
+                                ...
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                Slider
+                            </th>
+                            <th>
+                                fifu_slider_image_url_0
+                            </th>
+                            <th>
+                                fifu_slider_image_url_1
+                            </th>
+                            <th>
+                                ...
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+
+                <div id="tabs-3">
+                    <p>
+                        <iframe src="../wp-content/plugins/featured-image-from-url/admin/html/txt/product.txt"
+                                width="800px" height="230px" ></iframe>
+                    </p>
+                </div>
+
+                <div id="tabs-4">
+                    <p>
+                        <iframe src="../wp-content/plugins/featured-image-from-url/admin/html/txt/post.txt"
+                                width="800px" height="230px" ></iframe>
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <a name="top"></a>
+
+    <div class="box" style="">
+        <h2><a name="top">Checking compatibility between your theme (<?php echo wp_get_theme()?>) and FIFU Premium...</a></h2>
+        <div class="greybox">
+            <div id="tabsPremium">
+                <ul>
+                    <li><a href="#tabs-1">Features Compatibility</a></li>
+                    <li style="<?php echo fifu_woo_theme() ? '' : 'display:none' ?>"><a href="#tabs-2">WooCommerce Additional Steps</a></li>
+                    <li style="<?php echo fifu_woo_theme() ? '' : 'display:none' ?>"><a href="#tabs-3">Official FIFU WooCommerce Theme</a></li>
+                </ul>
+                <div id="tabs-1">
+                    <table>
+                        <tr>
+                            <th>as <b>Blog</b></th>
+                            <th>as <b>Shop</b></th>
+                        </tr>
+                        <tr>
+                            <td>featured image: yes</td>
+                            <td>product image: yes</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>product gallery: yes</td>
+                        </tr>
+                        <tr>
+                            <td>featured video: yes</td>
+                            <td>product video: <?php echo fifu_woo_theme()?'no':'yes'?></td>
+                        </tr>
+                        <tr>
+                            <td>featured slider: yes</td>
+                            <td>product slider: <?php echo fifu_woo_theme()?'no':'yes'?></td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="tabs-2">
+                    To use <b>FIFU Premium + WooCommerce + <?php echo wp_get_theme()?> theme</b>, you will need to follow the steps* below:
+                    <div class="box" style="">
+                        1) Open this file:<br>
+                        woocommerce/includes/abstracts/abstract-wc-product.php<br><br>
+                        2) Find this line:<br>
+                        public function get_gallery_image_ids( $context = 'view' ) {<br><br>
+                        3) Add this line immediately below that one:<br>
+                        $tmp = array(); $i = 0; while ($url = get_post_meta(get_the_ID(), "fifu_image_url_" . $i, true)) $tmp[] = $i++; if ($i > 0) return $tmp;
+                    </div><br>
+                    *you will need to redo that always you decide to update your WooCommerce version.<br><br>
+                </div>
+                <div id="tabs-3">
+                    FIFU is developed using <b><a href="https://wordpress.org/themes/storefront/">Storefront</a></b>, the official WooCommerce theme. So all the plugin features are compatible with that without any additional steps.<br><br>
+                    If your theme isn't flexible enough to work with external images, please consider to move to Storefront. Check the <a href="https://shop.featuredimagefromurl.com"><b>Live Preview</b></a>.
+                </div>
+            </div>			
+        </div>
+    </div>
+
+    <div class="box">
+        <h2>About <a href="https://featuredimagefromurl.com/">Featured Image from URL Premium</a></h2>
+        <div class="greybox">
+            <h3>1) "How to get support?"</h3>
+            You can inform any problem related to the Premium version in the email above. It will be solved as soon as possible and without any cost.<br><br>
+            <h3>2) "Which plugins are compatible with Premium version?"</h3>
+            WooCommerce, WP All Import, Monarch, Frontend Publishing and others. If you intend to use the Premium version with a specific plugin, try to test with the free version first. Or you can ask me if they are compatible.<br><br>
+            <h3>3) "Are there the known incompatibility issues?"</h3>
+            Themes: some WooCommerce themes aren’t flexible enough to work with Videos and Sliders. To know if your theme is compatible with those features, please take a look on “Checking compatibility” area, here in FIFU settings.<br><br>
+            <h3>4) "Can I get my money back later?"</h3>
+            With the exception of rare situations, no. But don't worry about that. You will still have the best support and if, after your complete cooperation, I'm not able to solve your issue, I may refund you.<br><br>
+            <h3>5) "How to get the Premium version?"</h3>
+            <div style="display:inline-block;">
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                    <input type="hidden" name="cmd" value="_s-xclick">
+                    <input type="hidden" name="hosted_button_id" value="8BLDLZ3HDBGQG">
+                    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
+                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                </form>
+            </div>
+            <div style="display:inline-block;top:-20px;position:relative">
+                (US$ 50 or more, please) and receive the Premium version by email within 12 hours.
+            </div>
+        </div>
+    </div>
+
+    <div class="box">
+        <h2>About The Author</h2>
+        <div class="greybox">
+            Hi! I'm Marcel Jacques Machado. Graduated in Computer Science and postgraduated in Deep and Machine Learning, I work as Software Engineer for 10 years. I already worked with C, Python, Shell Script and other programming languages and technologies. Nowadays, I develop web applications in Brazil using Java. About PHP, this plugin, Featured Image From URL, has been a great pratical experience.
+        </div>
+    </div>
+</div>
