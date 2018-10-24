@@ -1,3 +1,0 @@
-img.zoomImg {
-    display:<?php echo fifu_woo_zoom(); ?> !important;
-}

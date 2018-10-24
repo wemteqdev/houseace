@@ -1,8 +1,0 @@
-{
-	"status": "publish",
-	"content": "I'm using WP REST API!",
-	"title": "Featured Image from URL",
-	"excerpt": "My first post...",
-	"fifu_image_url": "https://ps.w.org/featured-image-from-url/assets/icon-256x256.png",
-	"fifu_image_alt": "Logo"
-}

@@ -85,3 +85,5 @@ Stack trace:
 [23-Oct-2018 06:00:22 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/wemteqco/public_html/houseace/scrapper.php on line 109
 [24-Oct-2018 06:00:14 UTC] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/wemteqco/public_html/houseace/scrapper.php on line 90
 [24-Oct-2018 06:00:21 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/wemteqco/public_html/houseace/scrapper.php on line 109
+[24-Oct-2018 23:10:50 UTC] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/wemteqco/public_html/houseace/scrapper-v2.php on line 133
+[24-Oct-2018 23:10:53 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/wemteqco/public_html/houseace/scrapper-v2.php on line 146

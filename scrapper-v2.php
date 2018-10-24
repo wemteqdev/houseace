@@ -239,6 +239,7 @@ foreach($listings_json as $listing)
      'body'    =>  $post_data
     ));
 
+    var_dump($response);
     // try to find houseace listing again
     if($wp_listing==null)
     {
