@@ -106,7 +106,7 @@ function update_listing_item( $request ) {
 }
 
 // Add the custom columns to the listing post type:
-add_filter( 'manage_listing_posts_columns', 'set_custom_edit_listing_columns', 10, 2 );
+// add_filter( 'manage_listing_posts_columns', 'set_custom_edit_listing_columns', 10, 2 );
 function set_custom_edit_listing_columns($columns) {
     unset( $columns['author'] );
     unset( $columns['date'] );
@@ -121,7 +121,7 @@ function set_custom_edit_listing_columns($columns) {
 }
 
 // Add the data to the custom columns for the listing post type:
-add_action( 'manage_listing_posts_custom_column' , 'custom_listing_column', 10, 2 );
+// add_action( 'manage_listing_posts_custom_column' , 'custom_listing_column', 10, 2 );
 function custom_listing_column( $column, $post_id ) {
     switch ( $column ) {
 
@@ -137,7 +137,6 @@ function custom_listing_column( $column, $post_id ) {
         case 'auctioned_date' :
             echo get_post_meta( $post_id , 'auctioned_date' , true ); 
             break;
-
     }
 }
 

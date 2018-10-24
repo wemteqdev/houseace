@@ -66,17 +66,20 @@ class domain_api
     }
 }
 
-$houseace_base_url = "https://houseace.com.au";
-$houseace_authorization_token = 'L9gN ea4x JRpG fqwC 1r75 H9Hn';
+$houseace_base_url = "https://www.houseace.com.au";
+$houseace_authorization_user = 'Developer';
+$houseace_authorization_token = 'u17b I3Od Y7ZG d5Wq GRtT EUys';
 
-$houseace_base_url = "https://houseace.wemteq.com";
-$houseace_authorization_token = 'D6Fz 8VCt Q5Nv BMxe MVf0 nOX8';
+// $houseace_base_url = "https://houseace.wemteq.com";
+// $houseace_authorization_token = 'D6Fz 8VCt Q5Nv BMxe MVf0 nOX8';
+// $houseace_authorization_user = 'admin';
 
 // $houseace_base_url = "http://houseace.loc:8888";
 // $houseace_authorization_token = 'q929 Cs8K l49A boxt rTue Mc9t';
+// $houseace_authorization_user = 'admin';
 
 $wp_headers = array (
-    'Authorization' => 'Basic ' . base64_encode( 'admin' . ':' . $houseace_authorization_token  ),
+    'Authorization' => 'Basic ' . base64_encode( $houseace_authorization_user . ':' . $houseace_authorization_token  ),
 );
 
 function get_houseace_listing_post($listing_id)
@@ -256,7 +259,7 @@ foreach($listings_json as $listing)
 
 
     $inserted_count++;
-    if($inserted_count == 15)
+    if($inserted_count == 3)
     {
         break;
     }
