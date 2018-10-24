@@ -96,6 +96,7 @@ function update_listing_item( $request ) {
 	}
 	
 	update_post_meta( $post_id, '_listing_bathrooms', $params['fields']['bathrooms'] );
+	update_post_meta( $post_id, '_listing_gallery', $params['fields']['gallery'] );
 	update_post_meta( $post_id, '_listing_bedrooms', $params['fields']['bedrooms'] );
 	update_post_meta( $post_id, '_listing_zip', $params['fields']['address_parts']['postcode']);
 	update_post_meta( $post_id, '_listing_state', $params['fields']['address_parts']['state_abbreviation']);

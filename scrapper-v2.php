@@ -157,6 +157,7 @@ foreach($listings_json as $listing)
     // get listing detail from domain.com.au
     $listing_data = $listings_api->getRequest('https://api.domain.com.au/v1/listings/' . $listing->id);
     $listing_json = json_decode($listing_data);
+
     sleep(3);
 
     if(!isset($listing_json->id)){
@@ -194,14 +195,18 @@ foreach($listings_json as $listing)
     $post_data['fields[id]'] = $listing_json->id;
 
     $images_count = 0;
+    $gallery_html = '';
     foreach($listing_json->media as $i => $image)
     {
         if($image->type=='photo')
         {
             $post_data['fields[media][image_'. $images_count .']'] = $image->url;
+            $gallery_html = $gallery_html . "<img src='" . $image->url . "'/>";
             $images_count++;
         }
     }
+
+    $post_data['fields[gallery]'] = $gallery_html;
 
     $post_data['fields[display_price]'] = $listing_json->priceDetails->displayPrice;
     $post_data['fields[sold_details][sold_action]'] = $listing_json->saleDetails->soldDetails->soldAction;
@@ -251,7 +256,7 @@ foreach($listings_json as $listing)
 
 
     $inserted_count++;
-    if($inserted_count == 10)
+    if($inserted_count == 15)
     {
         break;
     }

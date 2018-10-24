@@ -1,9 +1,2 @@
-array(2) {
-  ["title"]=>
-  string(4) "test"
-  ["field"]=>
-  array(1) {
-    ["bedrooms"]=>
-    string(3) "111"
-  }
-}
+
+Parse error: syntax error, unexpected '$images_count' (T_VARIABLE) in /Volumes/projects/houseace/scrapper-v2.php on line 205
