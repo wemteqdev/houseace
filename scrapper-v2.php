@@ -75,6 +75,41 @@ $houseace_authorization_token = 'D6Fz 8VCt Q5Nv BMxe MVf0 nOX8';
 // $houseace_base_url = "http://houseace.loc:8888";
 // $houseace_authorization_token = 'q929 Cs8K l49A boxt rTue Mc9t';
 
+$wp_headers = array (
+    'Authorization' => 'Basic ' . base64_encode( 'admin' . ':' . $houseace_authorization_token  ),
+);
+
+function get_houseace_listing_post($listing_id)
+{
+    global $houseace_base_url, $wp_headers;
+
+    $filters = array(
+     'filter[meta_key]'=>'id',
+     'filter[meta_value]'=> $listing_id
+    );
+
+    $filter_string = http_build_query($filters);
+    $url = $houseace_base_url .  '/wp-json/wp/v2/listing?' . $filter_string;
+
+    print("searching houseace listing with id:" . $listing_id  . " \n");
+
+    $response = wp_remote_get( $url, array (
+     'headers' => $wp_headers,
+    ));
+
+    $wp_listings = json_decode($response['body']);
+    $wp_listing = null;
+
+    if(count($wp_listings) > 0)
+    {
+        $wp_listing = $wp_listings[0];
+    }else{
+        print("Not Found: " . $url  . " \n");
+    }
+
+    return $wp_listing;
+}
+
 // prepare sales api client to pull sales results from domain.com.au
 $sales_client_id = 'client_538dd6d34c31418795c03e850d58b81c';
 $sales_client_secrets = 'secret_7ed35b18ad4e4b78a995a2e71b357ac9';
@@ -104,46 +139,6 @@ $listings_client_secrets = 'secret_7e2b4ce9a8608ad91394e9b89e32758f';
 $listings_api = new domain_api($listings_client_id, $listings_client_secrets);
 $listings_api->authorize();
 sleep(3);
-
-
-//$wp_headers = array (
-//     'Authorization' => 'Basic ' . base64_encode( 'admin' . ':' . '1vdR 4lVM ccLX 00zn suaK kVNr'  ),
-//);
-
-$wp_headers = array (
-     'Authorization' => 'Basic ' . base64_encode( 'admin' . ':' . 'q929 Cs8K l49A boxt rTue Mc9t'  ),
-);
-
-
-function get_houseace_listing_post($listing_id)
-{
-    global $houseace_base_url, $wp_headers;
-
-    $filters = array(
-     'filter[meta_key]'=>'id',
-     'filter[meta_value]'=> $listing_id
-    );
-
-    $filter_string = http_build_query($filters);
-    $url = $houseace_base_url .  '/wp-json/wp/v2/listing?' . $filter_string;
-
-    print("searching houseace listing with id:" . $listing_id  . " \n");
-
-    $response = wp_remote_get( $url, array (
-     'headers' => $wp_headers,
-    ));
-
-    $wp_listings = json_decode($response['body']);
-    $wp_listing = null;
-
-    if(count($wp_listings) > 0)
-    {
-        $wp_listing = $wp_listings[0];
-    }
-
-
-    return $wp_listing;
-}
 
 
 $inserted_count = 0;
