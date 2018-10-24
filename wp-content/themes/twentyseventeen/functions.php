@@ -88,11 +88,11 @@ function update_listing_item( $request ) {
 	wp_set_object_terms($post_id, explode(',', $params['fields']['features']), 'features', true);
 	wp_set_object_terms($post_id, $params['fields']['address_parts']['suburb'], 'locations', true);
 
-	if(isset($params['fields']['sold_details']['sold_price']))
+	if(isset($params['fields']['display_price']))
 	{
-		update_post_meta( $post_id, '_listing_price', $params['fields']['sold_details']['sold_price'] );
-	}else{
 		update_post_meta( $post_id, '_listing_price', $params['fields']['display_price'] );
+	}else{
+		update_post_meta( $post_id, '_listing_price', $params['fields']['sold_details']['sold_price'] );
 	}
 	
 	update_post_meta( $post_id, '_listing_bathrooms', $params['fields']['bathrooms'] );
