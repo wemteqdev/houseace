@@ -156,8 +156,7 @@ foreach($listings_json as $listing)
         continue;
     }
 
-    if($wp_listing!=null && $wp_listing->acf->auctioned_date == $results_header_json->auctionedDate 
-        && strtotime($wp_listing->acf->date_updated) <= strtotime($results_header_json->lastModifiedDateTime))
+    if($wp_listing!=null && $wp_listing->acf->auctioned_date == $results_header_json->auctionedDate)
     {
         print("listing already exists in houseace, skipped! \n");
         continue;
