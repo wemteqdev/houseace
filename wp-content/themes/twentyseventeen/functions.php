@@ -10,136 +10,6 @@
  */
 
 
-function set_featured_image_from_url($post_id, $image_url){
-	// Add Featured Image to Post
-	$post = get_post($post_id);
-
-  $image_name       = $post->post_name . '.jpg';
-  $upload_dir       = wp_upload_dir(); // Set upload folder
-  $image_data       = file_get_contents($image_url); // Get image data
-  $unique_file_name = wp_unique_filename( $upload_dir['path'], $image_name ); // Generate unique name
-  $filename         = basename( $unique_file_name ); // Create image file name
-
-  // Check folder permission and define file location
-  if( wp_mkdir_p( $upload_dir['path'] ) ) {
-      $file = $upload_dir['path'] . '/' . $filename;
-  } else {
-      $file = $upload_dir['basedir'] . '/' . $filename;
-  }
-
-  // Create the image  file on the server
-  file_put_contents( $file, $image_data );
-
-  // Check image file type
-  $wp_filetype = wp_check_filetype( $filename, null );
-
-  // Set attachment data
-  $attachment = array(
-      'post_mime_type' => $wp_filetype['type'],
-      'post_title'     => sanitize_file_name( $filename ),
-      'post_content'   => '',
-      'post_status'    => 'inherit'
-  );
-
-  // Create the attachment
-  $attach_id = wp_insert_attachment( $attachment, $file, $post_id );
-
-  // Include image.php
-  require_once(ABSPATH . 'wp-admin/includes/image.php');
-
-  // Define attachment metadata
-  $attach_data = wp_generate_attachment_metadata( $attach_id, $file );
-
-  // Assign metadata to attachment
-  wp_update_attachment_metadata( $attach_id, $attach_data );
-
-  // And finally assign featured image to post
-  set_post_thumbnail( $post_id, $attach_id );
-}
-
-
-//The Following registers an api route with multiple parameters. 
-add_action( 'rest_api_init', 'add_custom_users_api');
-function add_custom_users_api(){
-    register_rest_route( 'wq/v2', '/listings/(?P<id>[\d]+)', array(
-        'methods' => 'POST',
-        'callback' => 'update_listing_item',
-    ));
-}
-
-function update_listing_item( $request ) {
-	$post_id = $request->get_param('id');
-
-	if(!isset($post_id))
-	{
-		return;
-	}
-
-	$params = $request->get_body_params();
-
-	if (!has_post_thumbnail($post_id))
-	{
-		set_featured_image_from_url($post_id, $params['fields']['media']['image_1']);	
-	}
-
-	// wp_update_post( array('ID'=>$post_id, 'post_content'=>$params['fields[description]']) );
-	wp_set_object_terms($post_id, $params['fields']['status'], 'status', true);
-	wp_set_object_terms($post_id, explode(',', $params['fields']['property_types']), 'property-types', true);
-	wp_set_object_terms($post_id, explode(',', $params['fields']['features']), 'features', true);
-	wp_set_object_terms($post_id, $params['fields']['address_parts']['suburb'], 'locations', true);
-
-	if(isset($params['fields']['display_price']))
-	{
-		update_post_meta( $post_id, '_listing_price', $params['fields']['display_price'] );
-	}else{
-		update_post_meta( $post_id, '_listing_price', $params['fields']['sold_details']['sold_price'] );
-	}
-	
-	update_post_meta( $post_id, '_listing_bathrooms', $params['fields']['bathrooms'] );
-	update_post_meta( $post_id, '_listing_gallery', $params['fields']['gallery'] );
-	update_post_meta( $post_id, '_listing_bedrooms', $params['fields']['bedrooms'] );
-	update_post_meta( $post_id, '_listing_zip', $params['fields']['address_parts']['postcode']);
-	update_post_meta( $post_id, '_listing_state', $params['fields']['address_parts']['state_abbreviation']);
-	update_post_meta( $post_id, '_listing_address', $params['fields']['address_parts']['display_address']);
-	update_post_meta( $post_id, '_listing_latitude', $params['fields']['geo_location']['latitude'] );
-	update_post_meta( $post_id, '_listing_longitude', $params['fields']['geo_location']['longitude'] );
-}
-
-// Add the custom columns to the listing post type:
-// add_filter( 'manage_listing_posts_columns', 'set_custom_edit_listing_columns', 10, 2 );
-function set_custom_edit_listing_columns($columns) {
-    unset( $columns['author'] );
-    unset( $columns['date'] );
-
-    $columns['bedrooms'] = __( 'Bedrooms', 'houseace' );
-    $columns['bathrooms'] = __( 'Bathrooms', 'houseace' );
-    $columns['status'] = __( 'Status', 'houseace' );
-    $columns['auctioned_date'] = __( 'Auctioned Date', 'houseace' );
-    $columns['date'] = __( 'Date', 'houseace' );
-
-    return $columns;
-}
-
-// Add the data to the custom columns for the listing post type:
-// add_action( 'manage_listing_posts_custom_column' , 'custom_listing_column', 10, 2 );
-function custom_listing_column( $column, $post_id ) {
-    switch ( $column ) {
-
-        case 'bedrooms' :
-            echo get_post_meta( $post_id , 'bedrooms' , true ); 
-            break;
-        case 'bathrooms' :
-            echo get_post_meta( $post_id , 'bathrooms' , true ); 
-            break;
-        case 'status' :
-            echo get_post_meta( $post_id , 'status' , true ); 
-            break;
-        case 'auctioned_date' :
-            echo get_post_meta( $post_id , 'auctioned_date' , true ); 
-            break;
-    }
-}
-
 /**
  * Twenty Seventeen only works in WordPress 4.7 or later.
  */
@@ -768,3 +638,156 @@ require get_parent_theme_file_path( '/inc/customizer.php' );
  * SVG icons functions and filters.
  */
 require get_parent_theme_file_path( '/inc/icon-functions.php' );
+
+
+
+
+
+
+
+
+
+
+//houseace development
+
+function set_featured_image_from_url($post_id, $image_url){
+	// Add Featured Image to Post
+	$post = get_post($post_id);
+
+  $image_name       = $post->post_name . '.jpg';
+  $upload_dir       = wp_upload_dir(); // Set upload folder
+  $image_data       = file_get_contents($image_url); // Get image data
+  $unique_file_name = wp_unique_filename( $upload_dir['path'], $image_name ); // Generate unique name
+  $filename         = basename( $unique_file_name ); // Create image file name
+
+  // Check folder permission and define file location
+  if( wp_mkdir_p( $upload_dir['path'] ) ) {
+      $file = $upload_dir['path'] . '/' . $filename;
+  } else {
+      $file = $upload_dir['basedir'] . '/' . $filename;
+  }
+
+  // Create the image  file on the server
+  file_put_contents( $file, $image_data );
+
+  // Check image file type
+  $wp_filetype = wp_check_filetype( $filename, null );
+
+  // Set attachment data
+  $attachment = array(
+      'post_mime_type' => $wp_filetype['type'],
+      'post_title'     => sanitize_file_name( $filename ),
+      'post_content'   => '',
+      'post_status'    => 'inherit'
+  );
+
+  // Create the attachment
+  $attach_id = wp_insert_attachment( $attachment, $file, $post_id );
+
+  // Include image.php
+  require_once(ABSPATH . 'wp-admin/includes/image.php');
+
+  // Define attachment metadata
+  $attach_data = wp_generate_attachment_metadata( $attach_id, $file );
+
+  // Assign metadata to attachment
+  wp_update_attachment_metadata( $attach_id, $attach_data );
+
+  // And finally assign featured image to post
+  set_post_thumbnail( $post_id, $attach_id );
+}
+
+
+//The Following registers an api route with multiple parameters. 
+add_action( 'rest_api_init', 'add_custom_users_api');
+function add_custom_users_api(){
+    register_rest_route( 'wq/v2', '/listings/(?P<id>[\d]+)', array(
+        'methods' => 'POST',
+        'callback' => 'update_listing_item',
+    ));
+}
+
+function update_listing_item( $request ) {
+	$post_id = $request->get_param('id');
+
+	if(!isset($post_id))
+	{
+		return;
+	}
+
+	$params = $request->get_body_params();
+
+	if (!has_post_thumbnail($post_id))
+	{
+		set_featured_image_from_url($post_id, $params['fields']['media']['image_1']);	
+	}
+
+	// wp_update_post( array('ID'=>$post_id, 'post_content'=>$params['fields[description]']) );
+	wp_set_object_terms($post_id, $params['fields']['status'], 'status', true);
+	wp_set_object_terms($post_id, explode(',', $params['fields']['property_types']), 'property-types', true);
+	wp_set_object_terms($post_id, explode(',', $params['fields']['features']), 'features', true);
+	wp_set_object_terms($post_id, $params['fields']['address_parts']['suburb'], 'locations', true);
+
+	if(isset($params['fields']['display_price']))
+	{
+		update_post_meta( $post_id, '_listing_price', $params['fields']['display_price'] );
+	}else{
+		update_post_meta( $post_id, '_listing_price', $params['fields']['sold_details']['sold_price'] );
+	}
+	
+	update_post_meta( $post_id, '_listing_bathrooms', $params['fields']['bathrooms'] );
+	update_post_meta( $post_id, '_listing_gallery', $params['fields']['gallery'] );
+	update_post_meta( $post_id, '_listing_bedrooms', $params['fields']['bedrooms'] );
+	update_post_meta( $post_id, '_listing_zip', $params['fields']['address_parts']['postcode']);
+	update_post_meta( $post_id, '_listing_state', $params['fields']['address_parts']['state_abbreviation']);
+	update_post_meta( $post_id, '_listing_address', $params['fields']['address_parts']['display_address']);
+	update_post_meta( $post_id, '_listing_latitude', $params['fields']['geo_location']['latitude'] );
+	update_post_meta( $post_id, '_listing_longitude', $params['fields']['geo_location']['longitude'] );
+}
+
+add_filter( 'comments_open', 'listing_comments_open', 10, 2 );
+
+function listing_comments_open( $open, $post_id ) {
+
+	$post = get_post( $post_id );
+    
+	if ($post->post_type == 'listing') {$open = false;}
+
+	return $open;
+}
+
+// Add the custom columns to the listing post type:
+// add_filter( 'manage_listing_posts_columns', 'set_custom_edit_listing_columns', 10, 2 );
+function set_custom_edit_listing_columns($columns) {
+    unset( $columns['author'] );
+    unset( $columns['date'] );
+
+    $columns['bedrooms'] = __( 'Bedrooms', 'houseace' );
+    $columns['bathrooms'] = __( 'Bathrooms', 'houseace' );
+    $columns['status'] = __( 'Status', 'houseace' );
+    $columns['auctioned_date'] = __( 'Auctioned Date', 'houseace' );
+    $columns['date'] = __( 'Date', 'houseace' );
+
+    return $columns;
+}
+
+// Add the data to the custom columns for the listing post type:
+// add_action( 'manage_listing_posts_custom_column' , 'custom_listing_column', 10, 2 );
+function custom_listing_column( $column, $post_id ) {
+    switch ( $column ) {
+
+        case 'bedrooms' :
+            echo get_post_meta( $post_id , 'bedrooms' , true ); 
+            break;
+        case 'bathrooms' :
+            echo get_post_meta( $post_id , 'bathrooms' , true ); 
+            break;
+        case 'status' :
+            echo get_post_meta( $post_id , 'status' , true ); 
+            break;
+        case 'auctioned_date' :
+            echo get_post_meta( $post_id , 'auctioned_date' , true ); 
+            break;
+    }
+}
+

@@ -151,22 +151,21 @@ foreach($listings_json as $listing)
     // check if listing already exists in houseace wordpress
     $wp_listing = get_houseace_listing_post($listing->id);
 
-    // get listing detail from domain.com.au
-    $listing_data = $listings_api->getRequest('https://api.domain.com.au/v1/listings/' . $listing->id);
-    $listing_json = json_decode($listing_data);
-
     if(!isset($listing_json->id)){
         print("Listing not found in domain.com.au \n");
         continue;
     }
 
     if($wp_listing!=null && $wp_listing->acf->auctioned_date == $results_header_json->auctionedDate 
-        && strtolower($wp_listing->acf->status) == strtolower($listing_json->status))
+        && strtotime($wp_listing->acf->date_updated) <= strtotime($results_header_json->lastModifiedDateTime))
     {
         print("listing already exists in houseace, skipped! \n");
         continue;
     }
 
+    // get listing detail from domain.com.au
+    $listing_data = $listings_api->getRequest('https://api.domain.com.au/v1/listings/' . $listing->id);
+    $listing_json = json_decode($listing_data);
     sleep(3);
 
     // prepare listing post data to submit to houseace

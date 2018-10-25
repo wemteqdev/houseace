@@ -31,8 +31,6 @@
     // exit;
 
 
-    echo strtotime("2016-11-07T04:32:08.107Z");
-    exit;
     $post_id = 72;
 
     $data = array(
