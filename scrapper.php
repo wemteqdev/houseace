@@ -199,7 +199,7 @@ foreach($listings_json as $listing)
     $images_count = 0;
     $gallery_html = '';
     $floorplans_count = 0;
-    
+
     foreach($listing_json->media as $i => $image)
     {
         if($image->category=='image')
@@ -248,7 +248,6 @@ foreach($listings_json as $listing)
      'body'    =>  $post_data
     ));
 
-    var_dump($response);
     // try to find houseace listing again
     if($wp_listing==null)
     {
