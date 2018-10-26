@@ -198,16 +198,26 @@ foreach($listings_json as $listing)
 
     $images_count = 0;
     $gallery_html = '';
+    $floorplans_count = 0;
+    
     foreach($listing_json->media as $i => $image)
     {
-        if($image->type=='photo')
+        if($image->category=='image')
         {
             $post_data['fields[media][image_'. $images_count .']'] = $image->url;
+            $post_data['fields[media][image_'. $images_count .'_type]'] = $image->type;
+
+            if($image->type == 'floorplan')
+            {
+                $floorplans_count++;
+            }
+
             $gallery_html = $gallery_html . "<img src='" . $image->url . "'/>";
             $images_count++;
         }
     }
 
+    $post_data['fields[floorplans_count]'] = $floorplans_count;
     $post_data['fields[gallery]'] = $gallery_html;
 
     $post_data['fields[display_price]'] = $listing_json->priceDetails->displayPrice;
@@ -259,11 +269,6 @@ foreach($listings_json as $listing)
 
 
     $inserted_count++;
-    if($inserted_count == 3)
-    {
-        break;
-    }
-
 }
 
 print('completed:' . $inserted_count . '\n');

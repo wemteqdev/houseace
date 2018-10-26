@@ -132,6 +132,7 @@ sleep(3);
 print("fetching sydney sales listings \n");
 $results_data = $sales_api->getRequest('https://api.domain.com.au/v1/salesResults/Sydney/listings');
 $listings_json = json_decode($results_data);
+$listings_count = count($listings_json);
 sleep(3);
 print("listings: ". count($listings_json) . "\n");
 
@@ -146,15 +147,16 @@ sleep(3);
 
 $inserted_count = 0;
 
-foreach($listings_json as $listing)
+foreach($listings_json as $listing_index => $listing)
 {
+    print($listing_index . "/" . $listings_count . "...\n");
     // check if listing already exists in houseace wordpress
     $wp_listing = get_houseace_listing_post($listing->id);
 
     if($wp_listing!=null && $wp_listing->acf->auctioned_date == $results_header_json->auctionedDate)
     {
         print("listing already exists in houseace, skipped! \n");
-        continue;
+        // continue;
     }
     
     // get listing detail from domain.com.au
@@ -199,16 +201,25 @@ foreach($listings_json as $listing)
 
     $images_count = 0;
     $gallery_html = '';
+    $floorplans_count = 0;
     foreach($listing_json->media as $i => $image)
     {
-        if($image->type=='photo')
+        if($image->category=='image')
         {
             $post_data['fields[media][image_'. $images_count .']'] = $image->url;
+            $post_data['fields[media][image_'. $images_count .'_type]'] = $image->type;
+
+            if($image->type == 'floorplan')
+            {
+                $floorplans_count++;
+            }
+
             $gallery_html = $gallery_html . "<img src='" . $image->url . "'/>";
             $images_count++;
         }
     }
 
+    $post_data['fields[floorplans_count]'] = $floorplans_count;
     $post_data['fields[gallery]'] = $gallery_html;
 
     $post_data['fields[display_price]'] = $listing_json->priceDetails->displayPrice;
@@ -239,7 +250,6 @@ foreach($listings_json as $listing)
      'body'    =>  $post_data
     ));
 
-    var_dump($response);
     // try to find houseace listing again
     if($wp_listing==null)
     {
@@ -262,7 +272,7 @@ foreach($listings_json as $listing)
     $inserted_count++;
     if($inserted_count == 3)
     {
-        break;
+        //break;
     }
 
 }
