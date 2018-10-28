@@ -100,6 +100,11 @@ function get_houseace_listing_post($listing_id)
      'headers' => $wp_headers,
     ));
 
+    if ( is_wp_error( $response ) ) {
+        print($response->get_error_message() . "\n");
+        return null;
+    }
+
     $wp_listings = json_decode($response['body']);
     $wp_listing = null;
 
@@ -137,8 +142,13 @@ sleep(3);
 print("listings: ". count($listings_json) . "\n");
 
 // prepare listing api client
+
+// we have 2 domain.com api client to fix quota exceed
 $listings_client_id = 'client_f9a5c138ea674b1d93c0e97e03a67e82';
 $listings_client_secrets = 'secret_7e2b4ce9a8608ad91394e9b89e32758f';
+
+$listings_client_id = 'client_1a73bd15dc3941e09374b496601ac967';
+$listings_client_secrets = 'secret_ced5f6db14cbac5ad3d54f88f8eb55f2';
 
 $listings_api = new domain_api($listings_client_id, $listings_client_secrets);
 $listings_api->authorize();
@@ -146,29 +156,29 @@ sleep(3);
 
 
 $inserted_count = 0;
-
 foreach($listings_json as $listing_index => $listing)
 {
     print($listing_index . "/" . $listings_count . "...\n");
+
     // check if listing already exists in houseace wordpress
     $wp_listing = get_houseace_listing_post($listing->id);
 
     if($wp_listing!=null && $wp_listing->acf->auctioned_date == $results_header_json->auctionedDate)
     {
         print("listing already exists in houseace, skipped! \n");
-        // continue;
+        continue;
     }
     
     // get listing detail from domain.com.au
     $listing_data = $listings_api->getRequest('https://api.domain.com.au/v1/listings/' . $listing->id);
     $listing_json = json_decode($listing_data);
 
-    sleep(3);
-
     if(!isset($listing_json->id)){
-        print("Listing not found in domain.com.au \n");
+        print("Listing not found in domain.com.au <=<=<=<=<=<= \n");
         continue;
     }
+
+    sleep(2);
 
     // prepare listing post data to submit to houseace
     $post_data = [];

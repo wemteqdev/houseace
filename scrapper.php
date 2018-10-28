@@ -165,7 +165,13 @@ foreach($listings_json as $listing)
     // get listing detail from domain.com.au
     $listing_data = $listings_api->getRequest('https://api.domain.com.au/v1/listings/' . $listing->id);
     $listing_json = json_decode($listing_data);
-    sleep(3);
+
+    if(!isset($listing_json->id)){
+        print("Listing not found in domain.com.au <=<=<=<=<=<= \n");
+        continue;
+    }
+
+    sleep(2);
 
     // prepare listing post data to submit to houseace
     $post_data = [];
